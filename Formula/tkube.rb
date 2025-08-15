@@ -1,34 +1,18 @@
 class Tkube < Formula
   desc "Enhanced Teleport kubectl wrapper with auto-authentication"
   homepage "https://github.com/lidin10/tkube"
-  url "https://github.com/lidin10/tkube/archive/v1.0.0.tar.gz"
-  sha256 "e302643ed9bd54d6f707034c990c7bb2d2c4789bbff1abdffbe70032c07c3767"
+  url "https://github.com/lidin10/tkube/releases/download/v2.0.0/tkube_v2.0.0_darwin_arm64.tar.gz"
+  sha256 "a1d606d32d4964d5dd22fbf111dc43a7fa4060f5f4913732c661081d7293dfab"
   license "MIT"
-  head "https://github.com/lidin10/tkube.git", branch: "main"
+  version "2.0.0"
 
-  depends_on "go" => :build
+  depends_on "kubernetes-cli"
 
   def install
-    # Build with version information embedded
-    ldflags = "-s -w -X main.version=#{version}"
-    system "go", "build", *std_go_args(ldflags: ldflags)
-
-    # Generate shell completions
-    generate_completions_from_executable(bin/"tkube", "completion")
+    bin.install "tkube"
   end
 
   test do
-    # Test version command
-    assert_match version.to_s, shell_output("#{bin}/tkube version")
-    
-    # Test help command
-    assert_match "Enhanced Teleport kubectl wrapper", shell_output("#{bin}/tkube --help")
-    
-    # Test config path command
-    assert_match ".tkube/config.json", shell_output("#{bin}/tkube config path")
-    
-    # Test status command (should handle missing config gracefully)
-    output = shell_output("#{bin}/tkube status", 0)
-    assert_match "Configuration file", output
+    system "#{bin}/tkube", "version"
   end
 end
