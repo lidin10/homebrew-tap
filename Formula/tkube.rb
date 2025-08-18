@@ -1,10 +1,10 @@
 class Tkube < Formula
   desc "Enhanced Teleport kubectl wrapper with auto-authentication"
   homepage "https://github.com/lidin10/tkube"
-  url "https://github.com/lidin10/tkube/releases/download/v2.0.0/tkube_v2.0.0_darwin_arm64.tar.gz"
-  sha256 "a1d606d32d4964d5dd22fbf111dc43a7fa4060f5f4913732c661081d7293dfab"
+  url "https://github.com/lidin10/tkube/releases/download/v2.1.2/tkube_v2.1.2_darwin_arm64.tar.gz"
+  sha256 "bec80c91980f3afaa196cd21e84acc295cf14b3a9be1e52058c214163e4a554b"
   license "MIT"
-  version "2.0.0"
+  version "2.1.2"
 
   depends_on "kubernetes-cli"
 
